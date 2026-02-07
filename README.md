@@ -9,6 +9,6 @@ As Newton is in beta development, we install Newton from a a local Git submodule
 ```bash
 git clone git@github.com:ryanchaiyakul/dismech-warp.git
 cd dismech-warp
-git submodule update
+git submodule update --init
 uv sync
 ```

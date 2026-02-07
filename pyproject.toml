@@ -19,8 +19,12 @@ build-backend = "uv_build"
 dev = [
     "ipykernel>=7.1.0",
     "pyglet>=2.1.13",
+    "pytest>=9.0.2",
     "ruff>=0.15.0",
 ]
 
 [tool.uv.sources]
 newton = { path = "external/newton", editable = true }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
