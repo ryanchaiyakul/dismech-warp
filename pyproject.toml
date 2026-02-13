@@ -9,6 +9,7 @@ dependencies = [
     "warp-lang>=1.11.1",
     "newton[sim]",
     "usd-core>=25.11",
+    "socu",
 ]
 
 [build-system]
@@ -18,13 +19,14 @@ build-backend = "uv_build"
 [dependency-groups]
 dev = [
     "ipykernel>=7.1.0",
-    "pyglet>=2.1.13",
     "pytest>=9.0.2",
     "ruff>=0.15.0",
+    "symengine>=0.14.1",
 ]
 
 [tool.uv.sources]
 newton = { path = "external/newton", editable = true }
+socu = { git = "https://github.com/PREDICT-EPFL/socu.git" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
