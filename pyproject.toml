@@ -25,7 +25,7 @@ dev = [
 ]
 
 [tool.uv.sources]
-newton = { path = "external/newton", editable = true }
+newton = { path = "external/newton" }
 socu = { git = "https://github.com/PREDICT-EPFL/socu.git" }
 
 [tool.pytest.ini_options]

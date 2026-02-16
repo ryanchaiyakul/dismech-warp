@@ -139,7 +139,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "newton", extras = ["sim"], editable = "external/newton" },
+    { name = "newton", extras = ["sim"], directory = "external/newton" },
     { name = "socu", git = "https://github.com/PREDICT-EPFL/socu.git" },
     { name = "usd-core", specifier = ">=25.11" },
     { name = "warp-lang", specifier = ">=1.11.1" },
@@ -380,7 +380,7 @@ wheels = [
 
 [[package]]
 name = "newton"
-source = { editable = "external/newton" }
+source = { directory = "external/newton" }
 dependencies = [
     { name = "warp-lang" },
 ]

@@ -1,20 +1,45 @@
 from typing import cast
 import warp as wp
 
-from .util import parallel_transport
+from .util import get_material_frame
+
+from newton.solvers import SolverBase
+from newton import Model, ModelBuilder, State, Control, Contacts
+
+DER = "der"
 
 
-@wp.func
-def get_material_frame(
-    d1: wp.vec3, t1: wp.vec3, t1_new: wp.vec3, theta: float
-) -> tuple[wp.vec3, wp.vec3]:
-    d1_new = parallel_transport(d1, t1, t1_new)
-    d2_new = wp.cross(t1_new, d1_new)
-    c = wp.cos(theta)
-    s = wp.sin(theta)
-    m1 = c * d1_new + s * d2_new
-    m2 = -s * d1_new + c * d2_new
-    return m1, m2
+class DERSolver(SolverBase):
+    def __init__(self, model: Model):
+        super().__init__(model)
+        if not hasattr(model, DER):
+            raise AttributeError(
+                "DER custom attributes are missing from the model. "
+                "Call DERSolver.register_custom_attributes() before building the model. "
+            )
+        self.der = getattr(model, DER)
+
+    def step(
+        self,
+        state_in: State,
+        state_out: State,
+        control: Control,
+        contacts: Contacts,
+        dt: float,
+    ):
+        pass
+
+    @classmethod
+    def register_custom_attributes(cls, builder: ModelBuilder) -> None:
+        # TODO: register thetas, d1s, t1s, betas as custom state
+        # TODO: register l_ks, ks as custom persistent attributes
+        builder.add_custom_attribute(
+            name="thetas",
+            frequency=Model.AttributeFrequency.PARTICLE,
+            assignment=Model.AttributeAssignment.STATE,
+            dtype=float,
+            namespace=DER,
+        )
 
 
 @wp.kernel
