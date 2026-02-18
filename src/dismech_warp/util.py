@@ -92,3 +92,13 @@ def get_material_frame(
     m1 = c * d1_new + s * d2_new
     m2 = -s * d1_new + c * d2_new
     return m1, m2
+
+
+# TODO: comment
+@wp.func
+def get_ref_twist(
+    d10: wp.vec3, d11: wp.vec3, t0: wp.vec3, t1: wp.vec3, r: float
+) -> float:
+    ut = parallel_transport(d10, t0, t1)
+    ut = rotate_axis_angle(ut, t1, r)
+    return r + signed_angle(ut, d11, t1)

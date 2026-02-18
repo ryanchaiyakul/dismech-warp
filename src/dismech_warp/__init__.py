@@ -1,1 +1,1 @@
-from .strain import *
+from .der import DERSolver
