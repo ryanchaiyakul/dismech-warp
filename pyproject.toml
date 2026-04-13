@@ -7,9 +7,9 @@ authors = [{ name = "ryanchaiyakul", email = "ryanchaiyakul@gmail.com" }]
 requires-python = ">=3.13"
 dependencies = [
     "warp-lang>=1.11.1",
-    "newton[sim]",
     "usd-core>=25.11",
     "socu",
+    "newton>=1.1.0",
 ]
 
 [build-system]
@@ -25,7 +25,6 @@ dev = [
 ]
 
 [tool.uv.sources]
-newton = { path = "external/newton" }
 socu = { git = "https://github.com/PREDICT-EPFL/socu.git" }
 
 [tool.pytest.ini_options]
